@@ -52,18 +52,19 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 float circleshape(float2 position, float radius)
 {
-    return step(radius, length(position - float2(0.5)));
+    return step(radius, length(position - 0.5));
 }
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
     float2 coord = TexCoord;
-    float3 color = float3(0.0);
+    float3 color = 0.0;
 
-    float2 transate = float2(sin(u_time / 10.0), cos(u_time));
-    coord += transate * 0.5;
+    float2 translate = 0.0;
+    sincos(u_time / uint2(BUFFER_WIDTH, BUFFER_HEIGHT), translate.x, translate.y);
+    coord += translate * 0.5;
 
-    color += float3(circleshape(coord, 0.3));
+    color += circleshape(coord, 0.3);
 
     FragColor = float4(color, 1.0);
 }

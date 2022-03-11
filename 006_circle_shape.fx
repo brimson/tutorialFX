@@ -50,18 +50,18 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 float circleshape(float2 position, float radius)
 {
-    return step(radius, length(position - float2(0.5)));
+    return step(radius, length(position.xy - 0.5));
 }
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
     float2 position = TexCoord.xy;
 
-    float3 color = float3(0.0);
+    float3 color = 0.0;
 
     float circle = circleshape(position, 0.2);
 
-    color = float3(circle);
+    color = circle;
 
     FragColor = float4(color, 1.0);
 }

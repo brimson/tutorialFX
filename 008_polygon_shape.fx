@@ -61,13 +61,13 @@ float polygonshape(float2 position, float radius, float sides)
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 position = TexCoord;
+    float2 position = TexCoord.xy;
 
-    float3 color = float3(0.0);
+    float3 color = 0.0;
 
     float polygon = polygonshape(position, 0.6, 6.0);
 
-    color = float3(polygon);
+    color = polygon;
 
     FragColor = float4(color, 1.0);
 }

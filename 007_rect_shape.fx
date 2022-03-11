@@ -50,7 +50,7 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 float rectshape(float2 position, float2 scale)
 {
-    scale = float2(0.5) - scale.xy * 0.5;
+    scale = 0.5 - scale.xy * 0.5;
     float2 shaper = step(scale.xy, position.xy);
     shaper *= step(scale.xy, 1.0 - position.xy);
     return shaper.x * shaper.y;
@@ -60,11 +60,11 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
 {
     float2 position = TexCoord.xy;
 
-    float3 color = float3(0.0);
+    float3 color = 0.0;
 
     float rectangle = rectshape(position.xy, float2(0.3, 0.3));
 
-    color = float3(rectangle);
+    color = rectangle;
 
     FragColor = float4(color, 1.0);
 }
