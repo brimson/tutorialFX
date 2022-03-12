@@ -52,7 +52,8 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 float2x2 scale(float2 scale)
 {
-    return float2x2(scale.x, 0.0, 0.0, scale.y);
+    return float2x2(scale.x, 0.0,
+                    0.0, scale.y);
 }
 
 float circleshape(float2 position, float radius)
@@ -66,7 +67,7 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
     float3 color = 0.0;
 
     float2 PixelFactor = (float2)max(BUFFER_WIDTH, BUFFER_HEIGHT);
-    coord = mul(coord, scale(float2(sin(u_time / PixelFactor + 2.0))));
+    coord = mul(scale(float2(sin(u_time / PixelFactor + 2.0))), coord);
 
     color += circleshape(coord, 0.3);
 
