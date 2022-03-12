@@ -58,7 +58,8 @@ float rectshape(float2 position, float2 scale)
 
 float2x2 rotate(float angle)
 {
-    return float2x2(cos(angle), -sin(angle), sin(angle), cos(angle));
+    return float2x2(cos(angle), -sin(angle),
+                    sin(angle), cos(angle));
 }
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
