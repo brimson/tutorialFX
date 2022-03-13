@@ -75,5 +75,8 @@ technique _007_rect_shape
     {
         VertexShader = MainVS;
         PixelShader = MainPS;
+        #if BUFFER_COLOR_BIT_DEPTH == 8
+            SRGBWriteEnable = TRUE;
+        #endif
     }
 }

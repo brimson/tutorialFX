@@ -63,11 +63,11 @@ float circleshape(float2 position, float radius)
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
+    float2 u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
     float2 coord = TexCoord;
     float3 color = 0.0;
 
-    float2 PixelFactor = (float2)max(BUFFER_WIDTH, BUFFER_HEIGHT);
-    coord = mul(scale(float2(sin(u_time / PixelFactor + 2.0))), coord);
+    coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
 
     color += circleshape(coord, 0.3);
 
@@ -80,5 +80,8 @@ technique _011_scale
     {
         VertexShader = MainVS;
         PixelShader = MainPS;
+        #if BUFFER_COLOR_BIT_DEPTH == 8
+            SRGBWriteEnable = TRUE;
+        #endif
     }
 }

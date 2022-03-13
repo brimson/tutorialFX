@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 005 - color"
+    ReShadeFX version of "shader tutorial series - episode 014 - water color"
 
     Link:
-    https://youtu.be/ZQpE4GPUR5g
+    https://youtu.be/VxGfhPeeXqs
 
     BSD 3-Clause License
 
@@ -37,6 +37,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float u_time < source = "timer"; >;
+
 // Vertex shaders
 
 void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out float2 TexCoord : TEXCOORD0)
@@ -50,11 +52,23 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float3 color = float3(0.3, 0.5, 0.3);
-    FragColor = float4(color, 0.5);
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float2 coord = TexCoord.xy;
+
+    for(int n = 1; n < 8; n++)
+    {
+        float i = float(n);
+        coord += float2(0.7 / i + sin(i * coord.y + u_time_ps + 0.3 * i) + 0.8, 0.4 / i * sin(coord.x + u_time_ps + 0.3 * i) + 1.6);
+    }
+
+    coord *= float2(0.7 / sin(coord.y + u_time_ps + 0.3) + 0.8, 0.4 / sin(coord.x + u_time_ps + 0.3) + 1.6);
+
+    float3 color = float3(sin(coord.xy) * 0.5 + 0.5, sin(coord.x + coord.y));
+
+    FragColor = float4(color, 1.0);
 }
 
-technique _005_color
+technique _014_water_color
 {
     pass
     {

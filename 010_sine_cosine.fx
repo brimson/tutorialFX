@@ -57,11 +57,12 @@ float circleshape(float2 position, float radius)
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
     float2 coord = TexCoord;
     float3 color = 0.0;
 
     float2 translate = 0.0;
-    sincos(u_time / uint2(BUFFER_WIDTH, BUFFER_HEIGHT), translate.x, translate.y);
+    sincos(u_time_ps, translate.x, translate.y);
     coord += translate * 0.5;
 
     color += circleshape(coord, 0.3);
@@ -75,5 +76,8 @@ technique _010_sine_cosine
     {
         VertexShader = MainVS;
         PixelShader = MainPS;
+        #if BUFFER_COLOR_BIT_DEPTH == 8
+            SRGBWriteEnable = TRUE;
+        #endif
     }
 }

@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 005 - color"
+    ReShadeFX version of "shader tutorial series - episode 016 - warp lines"
 
     Link:
-    https://youtu.be/ZQpE4GPUR5g
+    https://youtu.be/7kgHaxOZ3dw
 
     BSD 3-Clause License
 
@@ -37,6 +37,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float u_time < source = "timer"; >;
+
 // Vertex shaders
 
 void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out float2 TexCoord : TEXCOORD0)
@@ -50,11 +52,20 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float3 color = float3(0.3, 0.5, 0.3);
-    FragColor = float4(color, 0.5);
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float2 coord = TexCoord.xy;
+    float color = 0.0;
+
+    color += sin(coord.x * 50.0 + cos(u_time_ps + coord.y * 10.0 + sin(coord.x * 50.0 + u_time_ps * 2.0))) * 2.0;
+    color += cos(coord.x * 20.0 + sin(u_time_ps + coord.y * 10.0 + cos(coord.x * 50.0 + u_time_ps * 2.0))) * 2.0;
+    color += sin(coord.x * 30.0 + cos(u_time_ps + coord.y * 10.0 + sin(coord.x * 50.0 + u_time_ps * 2.0))) * 2.0;
+    color += cos(coord.x * 10.0 + sin(u_time_ps + coord.y * 10.0 + cos(coord.x * 50.0 + u_time_ps * 2.0))) * 2.0;
+
+
+    FragColor = float4(float3(color + coord.y, color + coord.x, color), 1.0);
 }
 
-technique _005_color
+technique _016_warp_lines
 {
     pass
     {
