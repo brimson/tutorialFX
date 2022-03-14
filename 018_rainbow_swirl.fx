@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 011 - scale"
+    ReShadeFX version of "shader tutorial series - episode 018 - rainbow swirl"
 
     Link:
-    https://youtu.be/gxOfjRT5CMA
+    https://youtu.be/wkWYXjrOVlA
 
     BSD 3-Clause License
 
@@ -50,33 +50,24 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-float2x2 scale(float2 scale)
-{
-    return float2x2(scale.x, 0.0,
-                    0.0, scale.y);
-}
-
-float circleshape(float2 position, float radius)
-{
-    return step(radius, length(position - 0.5));
-}
-
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 coord = TexCoord;
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
+
+    float2 coord = TexCoord.xy;
     float3 color = 0.0;
 
-    // GLSL allows matrix-vector multiplication via <matrix> * <vector>
-    // Not possible in HLSL. We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
-    coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
+    float angle = atan2(-coord.y + 0.25, coord.x - 0.5) * 0.1;
+    float len = length(coord - float2(0.5, 0.25));
 
-    color += circleshape(coord, 0.3);
+    color.r += sin(len * 40.0 + angle * 40.0 + u_time_ps);
+    color.g += cos(len * 30.0 + angle * 60.0 - u_time_ps);
+    color.b += sin(len * 50.0 + angle * 50.0 + 3.0);
 
     FragColor = float4(color, 1.0);
 }
 
-technique _011_scale
+technique _018_rainbow_swirl
 {
     pass
     {

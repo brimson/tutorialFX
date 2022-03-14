@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 011 - scale"
+    ReShadeFX version of "shader tutorial series - episode 020 - moving light"
 
     Link:
-    https://youtu.be/gxOfjRT5CMA
+    https://youtu.be/1EmrgnpXj7A
 
     BSD 3-Clause License
 
@@ -50,33 +50,25 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-float2x2 scale(float2 scale)
-{
-    return float2x2(scale.x, 0.0,
-                    0.0, scale.y);
-}
-
-float circleshape(float2 position, float radius)
-{
-    return step(radius, length(position - 0.5));
-}
-
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 coord = TexCoord;
+    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float min_resolution = min(BUFFER_WIDTH, BUFFER_HEIGHT);
+
+    float u_time_ps = u_time / min_resolution;
+    float2 FragCoord = TexCoord.xy * u_resolution;
+
+    float2 coord = (FragCoord.xy * 2.0 - u_resolution) / min_resolution;
+    coord.x += sin(u_time_ps) + cos(u_time_ps * 2.1);
+    coord.y += cos(u_time_ps) + sin(u_time_ps * 1.6);
     float3 color = 0.0;
 
-    // GLSL allows matrix-vector multiplication via <matrix> * <vector>
-    // Not possible in HLSL. We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
-    coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
-
-    color += circleshape(coord, 0.3);
+    color += 0.1 * (abs(sin(u_time_ps)) + 0.1) / length(coord);
 
     FragColor = float4(color, 1.0);
 }
 
-technique _011_scale
+technique _020_moving_light
 {
     pass
     {

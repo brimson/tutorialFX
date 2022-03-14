@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 011 - scale"
+    ReShadeFX version of "shader tutorial series - episode 017 - wave draw lines"
 
     Link:
-    https://youtu.be/gxOfjRT5CMA
+    https://youtu.be/LboRu2kLQR4
 
     BSD 3-Clause License
 
@@ -50,33 +50,18 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-float2x2 scale(float2 scale)
-{
-    return float2x2(scale.x, 0.0,
-                    0.0, scale.y);
-}
-
-float circleshape(float2 position, float radius)
-{
-    return step(radius, length(position - 0.5));
-}
-
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 coord = TexCoord;
-    float3 color = 0.0;
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float2 coord = TexCoord.xy;
+    float color = 0.0;
 
-    // GLSL allows matrix-vector multiplication via <matrix> * <vector>
-    // Not possible in HLSL. We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
-    coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
+    color += sin(coord.x * 6.0 + sin(u_time_ps + coord.y * 90.0 + cos(coord.x * 30.0 + u_time_ps * 2.0))) * 0.5;
 
-    color += circleshape(coord, 0.3);
-
-    FragColor = float4(color, 1.0);
+    FragColor = float4(float3(color + coord.x, color + coord.x, color), 1.0);
 }
 
-technique _011_scale
+technique _017_wave_draw_lines
 {
     pass
     {

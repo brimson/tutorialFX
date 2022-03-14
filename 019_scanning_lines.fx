@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 011 - scale"
+    ReShadeFX version of "shader tutorial series - episode 019 - scanning lines"
 
     Link:
-    https://youtu.be/gxOfjRT5CMA
+    https://youtu.be/EzYZDJKVEwE
 
     BSD 3-Clause License
 
@@ -50,33 +50,23 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-float2x2 scale(float2 scale)
-{
-    return float2x2(scale.x, 0.0,
-                    0.0, scale.y);
-}
-
-float circleshape(float2 position, float radius)
-{
-    return step(radius, length(position - 0.5));
-}
-
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 coord = TexCoord;
-    float3 color = 0.0;
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
 
-    // GLSL allows matrix-vector multiplication via <matrix> * <vector>
-    // Not possible in HLSL. We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
-    coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
+    float2 coord = TexCoord.xy;
+    float color = 1.0;
 
-    color += circleshape(coord, 0.3);
+    float size = 12.0;
 
-    FragColor = float4(color, 1.0);
+    float alpha = sin(floor(coord.x * size) + u_time_ps * 4.0) + 1.0 / 2.0;
+
+    // Alpha is not displayable when written to backbuffer
+    // So we multiply the color by its alpha to emulate it
+    FragColor = color * alpha;
 }
 
-technique _011_scale
+technique _019_scanning_lines
 {
     pass
     {
