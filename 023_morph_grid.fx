@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 015 - water color 02"
+    ReShadeFX version of "shader tutorial series - episode 023 - morph grid"
 
     Link:
-    https://youtu.be/ye_JlwUIyto
+    https://youtu.be/EO2ax570wKo
 
     BSD 3-Clause License
 
@@ -38,7 +38,6 @@
 */
 
 uniform float u_time < source = "timer"; >;
-static const int AMOUNT = 2;
 
 // Vertex shaders
 
@@ -51,27 +50,28 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
+float random2d(float2 coord)
 {
-    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 FragCoord = TexCoord.xy * u_resolution;
-    float2 coord = 20.0 * (FragCoord - u_resolution / 2.0) / min(u_resolution.y, u_resolution.x);
-
-    float len;
-
-    for(int i = 0; i < AMOUNT; i++)
-    {
-        len = length(coord);
-
-        coord.x = coord.x - cos(coord.y + sin(len)) + cos(u_time_ps / 9.0);
-        coord.y = coord.y + sin(coord.x + cos(len)) + sin(u_time_ps / 12.0);
-    }
-
-    FragColor = float4(cos(len * 2.0), cos(len * 3.0), cos(len * 1.0), 1.0);
+    return frac(sin(dot(coord.xy, float2(12.9898, 78.233))) * 43758.5453);
 }
 
-technique _015_water_color_2
+void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
+{
+    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float u_time_ps = u_time / min(u_resolution.x, u_resolution.y);
+
+    float2 coord = (TexCoord * u_resolution) * 0.01;
+    coord -= u_time_ps + float2(sin(coord.y), cos(coord.x));
+
+    float rand01 = frac(random2d(floor(coord)) + u_time_ps / 60.0);
+    float rand02 = frac(random2d(floor(coord)) + u_time_ps / 40.0);
+
+    rand01 *= 0.4 - length(frac(coord));
+
+    FragColor = float4(rand01 * 4.0, rand02 * rand01 * 4.0, 0.0, 1.0);
+}
+
+technique _023_morph_grid
 {
     pass
     {

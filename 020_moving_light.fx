@@ -55,8 +55,8 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
     float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
     float min_resolution = min(BUFFER_WIDTH, BUFFER_HEIGHT);
 
-    float u_time_ps = u_time / min_resolution;
     float2 FragCoord = TexCoord.xy * u_resolution;
+    float u_time_ps = u_time / min_resolution;
 
     float2 coord = (FragCoord.xy * 2.0 - u_resolution) / min_resolution;
     coord.x += sin(u_time_ps) + cos(u_time_ps * 2.1);

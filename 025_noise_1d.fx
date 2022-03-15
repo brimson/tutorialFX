@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 015 - water color 02"
+    ReShadeFX version of "shader tutorial series - episode 025 - noise 1d"
 
     Link:
-    https://youtu.be/ye_JlwUIyto
+    https://youtu.be/rpBd-6n5q5w
 
     BSD 3-Clause License
 
@@ -38,7 +38,6 @@
 */
 
 uniform float u_time < source = "timer"; >;
-static const int AMOUNT = 2;
 
 // Vertex shaders
 
@@ -51,27 +50,24 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
+float noise1d(float value)
+{
+    return cos(value + cos(value * 90.0) * 100.0) * 0.5 + 0.5;
+}
+
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
     float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 FragCoord = TexCoord.xy * u_resolution;
-    float2 coord = 20.0 * (FragCoord - u_resolution / 2.0) / min(u_resolution.y, u_resolution.x);
 
-    float len;
+    float2 coord = TexCoord;
+    float3 color = 0.0;
 
-    for(int i = 0; i < AMOUNT; i++)
-    {
-        len = length(coord);
+    color.r += noise1d(u_time_ps);
 
-        coord.x = coord.x - cos(coord.y + sin(len)) + cos(u_time_ps / 9.0);
-        coord.y = coord.y + sin(coord.x + cos(len)) + sin(u_time_ps / 12.0);
-    }
-
-    FragColor = float4(cos(len * 2.0), cos(len * 3.0), cos(len * 1.0), 1.0);
+    FragColor = float4(color, 1.0);
 }
 
-technique _015_water_color_2
+technique _025_noise_1d
 {
     pass
     {

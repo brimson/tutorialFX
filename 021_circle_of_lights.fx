@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 015 - water color 02"
+    ReShadeFX version of "shader tutorial series - episode 021 - circle of lights"
 
     Link:
-    https://youtu.be/ye_JlwUIyto
+    https://youtu.be/aW_GW5uwWRM
 
     BSD 3-Clause License
 
@@ -37,9 +37,6 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-uniform float u_time < source = "timer"; >;
-static const int AMOUNT = 2;
-
 // Vertex shaders
 
 void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out float2 TexCoord : TEXCOORD0)
@@ -53,25 +50,23 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
-    float2 FragCoord = TexCoord.xy * u_resolution;
-    float2 coord = 20.0 * (FragCoord - u_resolution / 2.0) / min(u_resolution.y, u_resolution.x);
+    float2 coord = TexCoord;
+    float3 color = 0.0;
+    float2 translate = float2(-0.5, -0.5);
+    coord += translate;
 
-    float len;
-
-    for(int i = 0; i < AMOUNT; i++)
+    for(int i = 0; i < 40; i++)
     {
-        len = length(coord);
+        float radius = 0.3;
+        float rad = radians(360.0 / 40.0) * float(i);
 
-        coord.x = coord.x - cos(coord.y + sin(len)) + cos(u_time_ps / 9.0);
-        coord.y = coord.y + sin(coord.x + cos(len)) + sin(u_time_ps / 12.0);
+        color += 0.003 / length(coord + float2(radius * cos(rad), radius * sin(rad)));
     }
 
-    FragColor = float4(cos(len * 2.0), cos(len * 3.0), cos(len * 1.0), 1.0);
+    FragColor = float4(color, 1.0);
 }
 
-technique _015_water_color_2
+technique _021_circle_of_lights
 {
     pass
     {
