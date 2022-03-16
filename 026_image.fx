@@ -44,6 +44,11 @@ texture2D backbuffer : COLOR;
 sampler2D u_tex0
 {
     Texture = backbuffer;
+    AddressU = WRAP;
+    AddressV = WRAP;
+    #if BUFFER_COLOR_BIT_DEPTH == 8
+        SRGBTexture = TRUE;
+    #endif
 };
 
 // Vertex shaders
@@ -65,7 +70,7 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
 
     float3 color = 0.0;
 
-    coord.x = sin(u_time_ps);
+    coord.x += sin(u_time_ps);
 
     FragColor = tex2D(u_tex0, coord);
 }

@@ -44,6 +44,9 @@ texture2D backbuffer : COLOR;
 sampler2D u_tex0
 {
     Texture = backbuffer;
+    #if BUFFER_COLOR_BIT_DEPTH == 8
+        SRGBTexture = TRUE;
+    #endif
 };
 
 // Vertex shaders
