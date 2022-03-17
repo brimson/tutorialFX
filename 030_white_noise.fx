@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 028 - image manipulate"
+    ReShadeFX version of "shader tutorial series - episode 030 - white noise"
 
     Link:
-    https://youtu.be/vi2Ae2K1GQY
+    https://youtu.be/nM320eVlLvQ
 
     BSD 3-Clause License
 
@@ -37,6 +37,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float u_time < source = "timer"; >;
+
 texture2D backbuffer : COLOR;
 
 sampler2D u_tex0
@@ -58,19 +60,27 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
-void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
+float random2d(float2 coord)
 {
-    float2 coord = TexCoord.xy;
-    float3 color = 0.0;
-
-    float4 image = tex2D(u_tex0, coord);
-    image.r += sin(coord.x * 90.0);
-    image.r += cos(coord.y * 90.0);
-
-    FragColor = image;
+    return frac(sin(dot(coord.xy, float2(12.9898, 78.233))) * 43758.5453);
 }
 
-technique _028_image_manipulate
+void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
+{
+    float u_time_ps = u_time / min(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float2 coord = TexCoord.xy;
+
+    float3 color = 0.0;
+    float grain = 0.0;
+
+    grain = random2d((sin(coord) / 999999.9) * u_time_ps);
+
+    color = grain;
+
+    FragColor = float4(color, 1.0);
+}
+
+technique _030_white_noise
 {
     pass
     {

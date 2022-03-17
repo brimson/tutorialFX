@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 028 - image manipulate"
+    ReShadeFX version of "shader tutorial series - episode 029 - image color mix"
 
     Link:
-    https://youtu.be/vi2Ae2K1GQY
+    https://youtu.be/HT8HWSOgwf8
 
     BSD 3-Clause License
 
@@ -64,13 +64,14 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
     float3 color = 0.0;
 
     float4 image = tex2D(u_tex0, coord);
-    image.r += sin(coord.x * 90.0);
-    image.r += cos(coord.y * 90.0);
+    image.a = length(TexCoord.xy * 2.0 - 1.0);
 
-    FragColor = image;
+    color = lerp(image.rgb, color, image.a);
+
+    FragColor = color;
 }
 
-technique _028_image_manipulate
+technique _029_image_color_mix
 {
     pass
     {

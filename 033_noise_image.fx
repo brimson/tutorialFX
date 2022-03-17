@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 028 - image manipulate"
+    ReShadeFX version of "shader tutorial series - episode 033 - noise image"
 
     Link:
-    https://youtu.be/vi2Ae2K1GQY
+    https://youtu.be/8GaZsg8vJUw
 
     BSD 3-Clause License
 
@@ -37,6 +37,10 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float u_time < source = "timer"; >;
+
+static const float amount = 0.6;
+
 texture2D backbuffer : COLOR;
 
 sampler2D u_tex0
@@ -58,19 +62,31 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 // Pixel shaders
 
+float random2d(float2 coord)
+{
+    return frac(sin(dot(coord.xy, float2(12.9898, 78.233))) * 43758.5453);
+}
+
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 coord = TexCoord.xy;
+    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float u_time_ps = u_time / min(u_resolution.x, u_resolution.y);
+
+    float2 coord = TexCoord;
     float3 color = 0.0;
 
     float4 image = tex2D(u_tex0, coord);
-    image.r += sin(coord.x * 90.0);
-    image.r += cos(coord.y * 90.0);
+
+    float noise = (random2d(coord) - 0.5) * amount;
+
+    image.r += noise;
+    image.g += noise;
+    image.b += noise;
 
     FragColor = image;
 }
 
-technique _028_image_manipulate
+technique _033_noise_image
 {
     pass
     {

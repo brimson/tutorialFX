@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 028 - image manipulate"
+    ReShadeFX version of "shader tutorial series - episode 032 - scan image"
 
     Link:
-    https://youtu.be/vi2Ae2K1GQY
+    https://youtu.be/fX8ZbrgIPW8
 
     BSD 3-Clause License
 
@@ -37,6 +37,16 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float u_time < source = "timer"; >;
+
+uniform float2 u_mouse < source = "mousepoint"; >;
+
+static const float size = 6.0;
+
+static const float speed = -10.0;
+
+static const bool flip = true;
+
 texture2D backbuffer : COLOR;
 
 sampler2D u_tex0
@@ -60,17 +70,27 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 coord = TexCoord.xy;
+    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
+    float u_time_ps = u_time / min(u_resolution.x, u_resolution.y);
+
+    float2 coord = TexCoord;
     float3 color = 0.0;
 
     float4 image = tex2D(u_tex0, coord);
-    image.r += sin(coord.x * 90.0);
-    image.r += cos(coord.y * 90.0);
 
-    FragColor = image;
+    if (flip)
+    {
+        image.a = sin(floor(coord.x * size) - u_time_ps * speed);
+    }
+    else
+    {
+        image.a = sin(floor(coord.y * size) - u_time_ps * speed);
+    }
+
+    FragColor = image * image.a;
 }
 
-technique _028_image_manipulate
+technique _032_scan_image
 {
     pass
     {

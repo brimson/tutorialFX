@@ -1,10 +1,10 @@
 
 /*
     Description:
-    ReShadeFX version of "shader tutorial series - episode 028 - image manipulate"
+    ReShadeFX version of "shader tutorial series - episode 031 - mouse"
 
     Link:
-    https://youtu.be/vi2Ae2K1GQY
+    https://youtu.be/v5U4dmCe7AA
 
     BSD 3-Clause License
 
@@ -37,6 +37,8 @@
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+uniform float2 u_mouse < source = "mousepoint"; >;
+
 texture2D backbuffer : COLOR;
 
 sampler2D u_tex0
@@ -60,17 +62,18 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, out float4 FragColor : SV_Target0)
 {
-    float2 coord = TexCoord.xy;
+    float2 u_resolution = float2(BUFFER_WIDTH, BUFFER_HEIGHT);
+
+    float2 coord = TexCoord;
     float3 color = 0.0;
 
-    float4 image = tex2D(u_tex0, coord);
-    image.r += sin(coord.x * 90.0);
-    image.r += cos(coord.y * 90.0);
+    color.r = u_mouse.x / u_resolution.x;
+    color.b = u_mouse.y / u_resolution.y;
 
-    FragColor = image;
+    FragColor = float4(float3(color), 1.0);
 }
 
-technique _028_image_manipulate
+technique _031_mouse
 {
     pass
     {
