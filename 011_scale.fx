@@ -67,8 +67,8 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
     float2 coord = TexCoord;
     float3 color = 0.0;
 
-    // GLSL allows matrix-vector multiplication via <matrix> * <vector>
-    // Not possible in HLSL. We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
+    // GLSL allows matrix-vector multiplication via <matrix> * <vector>. This is not possible in HLSL.
+    // We have to do matrix-vector multiplication through mul(<matrix>, <vector>)
     coord = mul(scale(float2(sin(u_time_ps + 2.0))), coord);
 
     color += circleshape(coord, 0.3);

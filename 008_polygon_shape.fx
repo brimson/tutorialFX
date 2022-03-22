@@ -52,6 +52,7 @@ static const float PI = 3.1415926535;
 
 float polygonshape(float2 position, float radius, float sides)
 {
+    // (position * 2.0 - 1.0) scales texture cooordinates from [0.0, 1.0] to [-1.0, 1.0]
     position = position * 2.0 - 1.0;
     float angle = atan2(position.x, position.y);
     float slice = PI * 2.0 / sides;

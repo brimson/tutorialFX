@@ -50,6 +50,7 @@ void MainVS(in uint ID : SV_VertexID, out float4 Position : SV_Position, out flo
 
 float circleshape(float2 position, float radius)
 {
+    // (position.xy - 0.5) scales texture cooordinates from [0.0, 1.0] to [-0.5, 0.5]
     return step(radius, length(position.xy - 0.5));
 }
 

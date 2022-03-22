@@ -61,8 +61,7 @@ void MainPS(in float4 Position : SV_Position, in float2 TexCoord : TEXCOORD0, ou
     float2 coord = TexCoord;
     float3 color = 0.0;
 
-    float2 translate = 0.0;
-    sincos(u_time_ps, translate.x, translate.y);
+    float2 translate = float2(sin(u_time_ps), cos(u_time_ps));
     coord += translate * 0.5;
 
     color += circleshape(coord, 0.3);
