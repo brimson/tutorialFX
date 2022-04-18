@@ -6,6 +6,8 @@ Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 
 ## Shaders
 
+[Download](/shaders/)
+
 [1]: https://youtu.be/HIvNePu7UEE
 [5]: https://youtu.be/ZQpE4GPUR5g
 [6]: https://youtu.be/9oYssHkOn0I
