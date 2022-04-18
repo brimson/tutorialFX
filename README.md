@@ -6,8 +6,6 @@ ReShadeFX implementation of Lewis Lepton's Shader Tutorial Series
 
 > Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 
-[Download package](https://github.com/brimson/tutorialFX/archive/refs/heads/main.zip)
-
 [1]: https://youtu.be/HIvNePu7UEE
 [5]: https://youtu.be/ZQpE4GPUR5g
 [6]: https://youtu.be/9oYssHkOn0I
