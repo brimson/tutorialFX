@@ -39,8 +39,8 @@ Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 [32]: https://youtu.be/fX8ZbrgIPW8
 [33]: https://youtu.be/8GaZsg8vJUw
 
-Shader | Reference
--------|----------
+Shader (click to download) | Description
+---------------------------|------------
 [001_introduction](/shaders/001_introduction.fx) | [shader tutorial series - episode 000 - introduction][1]
 [005_color](/shaders/005_color.fx) | [shader tutorial series - episode 005 - color][5]
 [006_circle_shape](/shaders/006_circle_shape.fx) | [shader tutorial series - episode 006 - circle shape][6]
