@@ -6,8 +6,8 @@ Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 
 ## Shaders
 
-Shader | Name
--------|-----
+Shader | Reference
+-------|----------
 [001_introduction](https://github.com/brimson/tutorialFX/blob/main/shaders/001_introduction.fx) | [shader tutorial series - episode 000 - introduction](https://youtu.be/HIvNePu7UEE)
 [005_color](https://github.com/brimson/tutorialFX/blob/main/shaders/005_color.fx) | [shader tutorial series - episode 005 - color](https://youtu.be/ZQpE4GPUR5g)
 [006_circle_shape](https://github.com/brimson/tutorialFX/blob/main/shaders/006_circle_shape.fx) | [shader tutorial series - episode 006 - circle shape](https://youtu.be/9oYssHkOn0I)
