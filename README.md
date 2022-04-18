@@ -6,7 +6,7 @@ Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 
 ## Shaders
 
-[Download](/shaders/)
+### [Download package](https://github.com/brimson/tutorialFX/archive/refs/heads/main.zip)
 
 [1]: https://youtu.be/HIvNePu7UEE
 [5]: https://youtu.be/ZQpE4GPUR5g
