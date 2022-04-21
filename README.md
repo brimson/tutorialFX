@@ -6,37 +6,6 @@ ReShadeFX implementation of Lewis Lepton's Shader Tutorial Series
 
 > Some shaders have in-house changes due to the nature of HLSL and ReShadeFX
 
-[1]: https://youtu.be/HIvNePu7UEE
-[5]: https://youtu.be/ZQpE4GPUR5g
-[6]: https://youtu.be/9oYssHkOn0I
-[7]: https://youtu.be/wQkElpJ5DYo
-[8]: https://youtu.be/RhsmRjv_uj0
-[9]: https://youtu.be/dQ2XDN5r9Nc
-[10]: https://youtu.be/meeNZQNxbeQ
-[11]: https://youtu.be/gxOfjRT5CMA
-[12]: https://youtu.be/ssqTWRQwXVo
-[13]: https://youtu.be/x-59XYny5kg
-[14]: https://youtu.be/VxGfhPeeXqs
-[15]: https://youtu.be/ye_JlwUIyto
-[16]: https://youtu.be/7kgHaxOZ3dw
-[17]: https://youtu.be/LboRu2kLQR4
-[18]: https://youtu.be/wkWYXjrOVlA
-[19]: https://youtu.be/EzYZDJKVEwE
-[20]: https://youtu.be/1EmrgnpXj7A
-[21]: https://youtu.be/aW_GW5uwWRM
-[22]: https://youtu.be/vHNnpZdrO-0
-[23]: https://youtu.be/EO2ax570wKo
-[24]: https://youtu.be/ZBo0LrRzsUM
-[25]: https://youtu.be/rpBd-6n5q5w
-[26]: https://youtu.be/IpTCH8-jzQ4
-[27]: https://youtu.be/EA5p0hqVqfM
-[28]: https://youtu.be/vi2Ae2K1GQY
-[29]: https://youtu.be/HT8HWSOgwf8
-[30]: https://youtu.be/nM320eVlLvQ
-[31]: https://youtu.be/v5U4dmCe7AA
-[32]: https://youtu.be/fX8ZbrgIPW8
-[33]: https://youtu.be/8GaZsg8vJUw
-
 Shader (click to download) | Description
 ---------------------------|------------
 [001_introduction](/shaders/001_introduction.fx)                | [shader tutorial series - episode 000 - introduction][1]
@@ -75,3 +44,34 @@ Shader (click to download) | Description
 [Lewis Lepton's YouTube Channel](https://www.youtube.com/channel/UC8Wzk_R1GoPkPqLo-obU_kQ)
 
 [Lewis Lepton's Shader Tutorial Series Repository](https://github.com/lewislepton/shadertutorialseries)
+
+[1]: https://youtu.be/HIvNePu7UEE
+[5]: https://youtu.be/ZQpE4GPUR5g
+[6]: https://youtu.be/9oYssHkOn0I
+[7]: https://youtu.be/wQkElpJ5DYo
+[8]: https://youtu.be/RhsmRjv_uj0
+[9]: https://youtu.be/dQ2XDN5r9Nc
+[10]: https://youtu.be/meeNZQNxbeQ
+[11]: https://youtu.be/gxOfjRT5CMA
+[12]: https://youtu.be/ssqTWRQwXVo
+[13]: https://youtu.be/x-59XYny5kg
+[14]: https://youtu.be/VxGfhPeeXqs
+[15]: https://youtu.be/ye_JlwUIyto
+[16]: https://youtu.be/7kgHaxOZ3dw
+[17]: https://youtu.be/LboRu2kLQR4
+[18]: https://youtu.be/wkWYXjrOVlA
+[19]: https://youtu.be/EzYZDJKVEwE
+[20]: https://youtu.be/1EmrgnpXj7A
+[21]: https://youtu.be/aW_GW5uwWRM
+[22]: https://youtu.be/vHNnpZdrO-0
+[23]: https://youtu.be/EO2ax570wKo
+[24]: https://youtu.be/ZBo0LrRzsUM
+[25]: https://youtu.be/rpBd-6n5q5w
+[26]: https://youtu.be/IpTCH8-jzQ4
+[27]: https://youtu.be/EA5p0hqVqfM
+[28]: https://youtu.be/vi2Ae2K1GQY
+[29]: https://youtu.be/HT8HWSOgwf8
+[30]: https://youtu.be/nM320eVlLvQ
+[31]: https://youtu.be/v5U4dmCe7AA
+[32]: https://youtu.be/fX8ZbrgIPW8
+[33]: https://youtu.be/8GaZsg8vJUw
