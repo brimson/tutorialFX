@@ -43,7 +43,9 @@ Shader (click to download) | Description
 
 [Lewis Lepton's YouTube Channel](https://www.youtube.com/channel/UC8Wzk_R1GoPkPqLo-obU_kQ)
 
-[Lewis Lepton's Shader Tutorial Series Repository](https://github.com/lewislepton/shadertutorialseries)
+[Lewis Lepton's Shader Tutorial Series playlist](https://www.youtube.com/watch?v=HIvNePu7UEE&list=PL4neAtv21WOmIrTrkNO3xCyrxg4LKkrF7)
+
+[Lewis Lepton's Shader Tutorial Series repository](https://github.com/lewislepton/shadertutorialseries)
 
 [1]: https://youtu.be/HIvNePu7UEE
 [5]: https://youtu.be/ZQpE4GPUR5g
