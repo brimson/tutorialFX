@@ -8,7 +8,7 @@ ReShadeFX implementation of Lewis Lepton's Shader Tutorial Series
 
 Shader (click to download) | Description
 ---------------------------|------------
-[001_introduction](/shaders/001_introduction.fx)                | [shader tutorial series - episode 000 - introduction][1]
+[001_introduction](/shaders/001_introduction.fx)                | [shader tutorial series - episode 001 - setup visual studio code][1]
 [005_color](/shaders/005_color.fx)                              | [shader tutorial series - episode 005 - color][5]
 [006_circle_shape](/shaders/006_circle_shape.fx)                | [shader tutorial series - episode 006 - circle shape][6]
 [007_rect_shape](/shaders/007_rect_shape.fx)                    | [shader tutorial series - episode 007 - rect shape][7]
@@ -47,7 +47,7 @@ Shader (click to download) | Description
 
 [Lewis Lepton's Shader Tutorial Series repository](https://github.com/lewislepton/shadertutorialseries)
 
-[1]: https://youtu.be/HIvNePu7UEE
+[1]: https://youtu.be/K1AcS_UpUQ4
 [5]: https://youtu.be/ZQpE4GPUR5g
 [6]: https://youtu.be/9oYssHkOn0I
 [7]: https://youtu.be/wQkElpJ5DYo
